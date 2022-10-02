@@ -13,6 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public int $group_id;
     /**
      * The attributes that are mass assignable.
      *
@@ -39,4 +40,14 @@ class User extends Authenticatable
     protected $dispatchesEvents = [
       'created' => UserCreated::class
     ];
+
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'group_to_user')->wherePivot('group_id', $this->group_id);
+    }
+
+    public function groups(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Group::class, 'group_to_user');
+    }
 }
