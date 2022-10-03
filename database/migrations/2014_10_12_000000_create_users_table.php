@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('image')->default('/images/avatar.webp');
+            $table->string('image')->default(env('APP_URL').'/public/image/avatar.webp');
             $table->string('info')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -21,8 +21,6 @@ class AuthService
     {
         $user = $this->repository->find($validated);
 
-        $user->tokens()->delete();
-
         $token = $user->createToken($user->name);
 
         return $token;
