@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthController;
 use \Illuminate\Http\Request;
+use \App\Http\Resources\GroupResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +25,5 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/user-info', function (Request $request){ return $request->user(); })->name('user_info');
 
-    Route::get('/user-groups', function (Request $request){ return $request->user()->groups; })->name('user_groups');
+    Route::get('/user-groups', function (Request $request){ return GroupResource::collection($request->user()->groups); })->name('user_groups');
 });

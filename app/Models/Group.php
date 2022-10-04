@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
@@ -11,4 +10,9 @@ class Group extends Model
         'name',
         'description'
     ];
+
+    public function newTasks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Task::class)->where('status_id', Status::NEW_TASK);
+    }
 }
